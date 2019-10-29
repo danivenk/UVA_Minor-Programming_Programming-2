@@ -3,7 +3,6 @@
     box-shadow: 0 0 10px #444;
     height: 100%;
     padding: 0;
-    position: fixed;
 }
 
 nav {
@@ -44,7 +43,7 @@ footer {
     width: 100%;
 }
 
-@media screen and (max-device-width: 600px) {
+@media screen and (max-device-width: 768px) {
     body {
         font-size: 100%;
     }
@@ -60,5 +59,9 @@ footer {
 
     #content {
         margin: 5% 5% 0 5%;
+    }
+
+    .col-sm-6 {
+        margin: 1%;
     }
 }
