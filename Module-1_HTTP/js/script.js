@@ -3,11 +3,16 @@ function init()
 {
     // define the nav objects and finds the placeholder for the nav
     var nav_element = document.querySelector("#nav");
-    var nav_objects = [["index", "Home"], ["index", "Home"],
-        ["index", "Home"], ["index", "Home"]]
+    var nav_objects = [["index", "Home"], ["page1", "Winner"],
+        ["page2", "Runner Up"], ["page3", "Third place"]]
 
     // defines the content to be added to the placeholder
-    var nav_content = '<div class="nav-bar">';
+    var nav_content = '<button class="navbar-toggler" type="button" \
+        data-toggle="collapse" data-target="#navbarNavAltMarkup" \
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" \
+        aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span> \
+        </button><div class="collapse navbar-collapse" id="navbarNavAltMarkup"> \
+        <div class="navbar-nav">';
 
     // create a link to a page for each nav object and add it to nav_content
     for (object in nav_objects)
