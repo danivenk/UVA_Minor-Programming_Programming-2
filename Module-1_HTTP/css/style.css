@@ -11,9 +11,8 @@
         background-color: #E06;
     }
 
-    nav .nav-link:hover {
-        background-color: #1F4;
-        box-shadow: 0 0 10px #444;
+    .nav-link:hover {
+        color: #FFF!important;
     }
 
     /* content style */
@@ -75,7 +74,13 @@
         padding-bottom: 5%;
     }
 
-    img {
+    .row img {
         width: 90%;
+        margin: 0 5% 1% 5%;
+    }
+
+    .row .img {
+        max-width: 100%!important;
+        flex: 0 0 100%!important;
     }
 }
