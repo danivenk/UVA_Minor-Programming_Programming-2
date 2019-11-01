@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# mario.py makes a mario piramid of a userdefined height
+# greedy.py finds the minimum amount of coins needed for the change owed
 # Dani van Enk, 11823526
 
 
 def main():
     """
-    
+    finds the minimum amount of coins needed for the change owed
     """
     coins_back(get_input("Change owed: "))
     
@@ -35,9 +35,17 @@ def get_input(user_promt):
     return value
 
 def coins_back(change):
-    values = [100, 50, 20, 10, 5, 1, .25, .10, .05, .01]
+    """
+    calculates the number of coins owed
+
+    parameters:
+    change - the changed owed
+    """
+    # used variables
+    values = [.25, .10, .05, .01]
     coins = 0
 
+    # check how many coins are needed
     for coin in values:
         while True:
             if change - coin >= 0:
@@ -46,6 +54,7 @@ def coins_back(change):
             else:
                 break
     
+    # print the number of coins
     print(coins)
 
 # run main
