@@ -7,9 +7,9 @@ def main():
     """
     draws a mario  double piramid with a userdefined height
     """
-    double_pyramid(get_input())
+    double_pyramid(get_input("Height "))
 
-def get_input():
+def get_input(user_promt):
     """
     gets a user input and only accepts positive integers,
     if input is negative or non numeric it'll promt the user again
@@ -19,19 +19,19 @@ def get_input():
     # promt user untill correct format
     while True:
         # promt user
-        height = input("Height ")
+        user_input = input(user_promt)
 
-        # try if height is an integer
+        # try if user_input is an integer
         try:
-            height = int(height)
+            value = int(user_input)
         except ValueError:
-            height = -110
+            value = -110
 
-        # if height is positive break
-        if height > 0:
+        # if value is positive break
+        if value > 0:
             break
 
-        return height
+    return value
 
 def double_pyramid(height):
     """
