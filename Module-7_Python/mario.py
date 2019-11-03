@@ -7,7 +7,7 @@ def main():
     """
     draws a mario  double piramid with a userdefined height
     """
-    double_pyramid(get_input("Height "))
+    double_pyramid(get_input("Height: "))
 
 def get_input(user_promt):
     """
