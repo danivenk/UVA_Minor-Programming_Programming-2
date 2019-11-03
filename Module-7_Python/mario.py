@@ -56,13 +56,7 @@ def double_pyramid(height):
         for k in range(height):
             if k <= i:
                 print("#", end="")
-<<<<<<< HEAD
-            else:
-                print(" ", end="")
 
-=======
-        
->>>>>>> c639e4ac189cf4eab3ed930fe50d8fdabe29278e
         # print a linebreak
         print()
 
