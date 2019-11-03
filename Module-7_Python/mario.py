@@ -28,7 +28,7 @@ def get_input(user_promt):
             value = -110
 
         # if value is positive break
-        if value > 0:
+        if 0 < value < 25:
             break
 
     return value
