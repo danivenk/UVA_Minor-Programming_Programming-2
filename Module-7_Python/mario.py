@@ -9,6 +9,7 @@ def main():
     """
     double_pyramid(get_input("Height: "))
 
+
 def get_input(user_promt):
     """
     gets a user input and only accepts positive integers,
@@ -32,6 +33,7 @@ def get_input(user_promt):
             break
 
     return value
+
 
 def double_pyramid(height):
     """
@@ -59,6 +61,7 @@ def double_pyramid(height):
 
         # print a linebreak
         print()
+
 
 # run main
 if __name__ == "__main__":

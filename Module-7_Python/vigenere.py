@@ -5,12 +5,14 @@
 # import library
 import sys
 
+
 def main():
     """
     executes the encode function
     """
     key, plain = get_key_plain()
     encode(key, plain)
+
 
 def get_key_plain():
     """
@@ -27,6 +29,7 @@ def get_key_plain():
     
     return sys.argv[1], user_input
 
+
 def char_to_number(char):
     """
     gets the number of a given character A/a => 0, B/b => 1 etc.
@@ -42,6 +45,7 @@ def char_to_number(char):
         return (ord(char) - ord("A"))
     else:
         return (ord(char) - ord("a"))
+
 
 def encode(key, plain):
     """
@@ -79,6 +83,7 @@ def encode(key, plain):
             pos += 1
 
     print()
+
 
 # run main
 if __name__ == "__main__":

@@ -34,6 +34,7 @@ def get_input(user_promt):
 
     return value
 
+
 def coins_back(change):
     """
     calculates the number of coins owed
@@ -56,6 +57,7 @@ def coins_back(change):
     
     # print the number of coins
     print(coins)
+
 
 # run main
 if __name__ == "__main__":
