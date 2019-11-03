@@ -12,7 +12,7 @@ def main():
 
 def get_input(user_promt):
     """
-    gets a user input and only accepts positive floating points,
+    gets a user input and only accepts positive integer (in cents),
     if input is negative or non numeric it'll promt the user again
 
     returns the value as an int
@@ -22,9 +22,9 @@ def get_input(user_promt):
         # promt user
         user_input = input(user_promt)
 
-        # try if user_input is an floating point
+        # try if user_input is an integer
         try:
-            value = float(user_input)
+            value = round(100*float(user_input))
         except ValueError:
             value = -110
 
@@ -42,7 +42,7 @@ def coins_back(change):
     change - the changed owed
     """
     # used variables
-    values = [.25, .10, .05, .01]
+    values = [25, 10, 5, 1]
     coins = 0
 
     # check how many coins are needed
