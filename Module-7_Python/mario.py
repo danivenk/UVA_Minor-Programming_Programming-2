@@ -58,7 +58,7 @@ def double_pyramid(height):
                 print("#", end="")
             else:
                 print(" ", end="")
-        
+
         # print a linebreak
         print()
 
