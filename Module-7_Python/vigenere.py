@@ -60,19 +60,20 @@ def encode(key, plain):
 
     # loop over every character in the text
     for char in plain:
+        key_pos = pos % key_len
         # leave non-alphabetical characters alone
         if not char.isalpha():
             print(char, end="")
         # cipher characters
         elif char.isupper():
-            cipher = chr(char_to_number(char) + \
-                char_to_number(key[pos % key_len]) % 26 + ord("A"))
+            cipher = chr((char_to_number(char) + char_to_number(key[key_pos]))
+                % 26 + ord("A"))
             
             print(cipher, end="")
             pos += 1
         else:
-            cipher = chr(char_to_number(char) + \
-                char_to_number(key[pos % key_len]) % 26 + ord("a"))
+            cipher = chr((char_to_number(char) + char_to_number(key[key_pos]))
+                % 26 + ord("a"))
             
             print(cipher, end="")
             pos += 1
