@@ -2,6 +2,9 @@ from sys import argv
 
 
 def main():
+    if len(argv) != 2:
+        exit("Usage: python bleep.py dictionary")
+    
     censor(load(argv[1]))
 
 def load(file):
