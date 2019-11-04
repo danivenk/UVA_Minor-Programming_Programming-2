@@ -2,10 +2,10 @@ from sys import argv
 
 
 def main():
-    if len(argv) != 2:
-        exit("Usage: python bleep.py dictionary")
+    # if len(argv) != 2:
+    #     exit("Usage: python bleep.py dictionary")
     
-    censor(load(argv[1]))
+    censor(load("D:/danivenk/Dropbox/MProg_Programming/UVA_Minor-Programming_Programming-2/Module-7_Python/Ex2-bleep/banned.txt"))# argv[1]))
 
 def load(file):
     infile = open(file,"r")
@@ -26,7 +26,7 @@ def censor(words):
     word_no = 0
 
     for word in user_words:
-        if word in words:
+        if word.lower() in words:
             for char in word:
                 print("*", end="")
         else:
