@@ -28,7 +28,7 @@ def load(file):
     """
 
     # open file
-    infile = open(file,"r")
+    infile = open(file, "r")
 
     banned_word = []
 
