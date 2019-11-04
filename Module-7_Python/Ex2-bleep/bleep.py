@@ -22,13 +22,22 @@ def censor(words):
 
     user_words = user_input.split(" ")
 
+    no_of_words = len(user_words)
+    word_no = 0
+
     for word in user_words:
         if word in words:
             for char in word:
                 print("*", end="")
         else:
             print(word, end="")
-        print(" ", end="")
+
+        if word_no < no_of_words:
+            print(" ", end="")
+
+        word_no += 1
+
+    print()
 
 
 if __name__ == "__main__":
