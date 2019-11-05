@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-# greedy.py finds the minimum amount of coins needed for the change owed
-# Dani van Enk, 11823526
+# -*- coding: utf-8 -*-
+"""
+greedy.py finds the minimum amount of coins needed for the change owed
+Dani van Enk, 11823526
+"""
 
 
 def main():

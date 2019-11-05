@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-# vigenere.py encodes a string according to a keystring
-# Dani van Enk, 11823526
+# -*- coding: utf-8 -*-
+"""
+vigenere.py encodes a string according to a keystring
+Dani van Enk, 11823526
+"""
 
 # import library
 import sys
@@ -70,13 +73,13 @@ def encode(key, plain):
             print(char, end="")
         # cipher characters
         elif char.isupper():
-            cipher = chr((char_to_number(char) + char_to_number(key[key_pos]))
+            cipher = chr((char_to_number(char) + char_to_number(key[key_pos])) \
                 % 26 + ord("A"))
             
             print(cipher, end="")
             pos += 1
         else:
-            cipher = chr((char_to_number(char) + char_to_number(key[key_pos]))
+            cipher = chr((char_to_number(char) + char_to_number(key[key_pos])) \
                 % 26 + ord("a"))
             
             print(cipher, end="")

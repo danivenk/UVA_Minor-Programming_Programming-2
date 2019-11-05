@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-# mario.py makes a mario piramid of a userdefined height
-# Dani van Enk, 11823526
+# -*- coding: utf-8 -*-
+"""
+mario.py makes a mario piramid of a userdefined height
+Dani van Enk, 11823526
+"""
 
 
 def main():

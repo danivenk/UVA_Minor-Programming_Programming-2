@@ -1,6 +1,9 @@
 #!/usr/bin/env python
-# vigenere.py encodes a string according to a keystring
-# Dani van Enk, 11823526
+# -*- coding: utf-8 -*-
+"""
+vigenere.py encodes a string according to a keystring
+Dani van Enk, 11823526
+"""
 
 # used libraries
 from sys import argv
