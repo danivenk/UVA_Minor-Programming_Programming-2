@@ -57,7 +57,7 @@ def encode(key, plain):
     only alphabetical characters get ciphered
 
     parameter:
-    key - a string to use to cipher the text with
+    key - a string to use to cipher the text with;
     plain - a string to cipher
     """
     print("ciphertext: ", end="")
@@ -75,7 +75,7 @@ def encode(key, plain):
         # cipher characters
         elif char.isupper():
             cipher = chr((char_to_number(char) + char_to_number(key[key_pos])) \
-                % 26 + ord("A"))
+                        % 26 + ord("A"))
             
             print(cipher, end="")
             pos += 1
