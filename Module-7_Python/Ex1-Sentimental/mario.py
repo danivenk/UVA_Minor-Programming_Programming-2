@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+version: python 3+
 mario.py makes a mario piramid of a userdefined height
 Dani van Enk, 11823526
 """

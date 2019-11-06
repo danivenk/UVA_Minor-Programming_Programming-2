@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+version: python 3+
 vigenere.py encodes a string according to a keystring
 Dani van Enk, 11823526
 """

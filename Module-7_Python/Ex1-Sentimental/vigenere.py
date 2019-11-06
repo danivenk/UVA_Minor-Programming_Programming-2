@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+version: python 3+
 vigenere.py encodes a string according to a keystring
 Dani van Enk, 11823526
 """
@@ -80,7 +81,7 @@ def encode(key, plain):
             pos += 1
         else:
             cipher = chr((char_to_number(char) + char_to_number(key[key_pos])) \
-                % 26 + ord("a"))
+                        % 26 + ord("a"))
             
             print(cipher, end="")
             pos += 1
