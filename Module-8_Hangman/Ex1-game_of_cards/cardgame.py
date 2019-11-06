@@ -41,14 +41,14 @@ class Deck:
     """
     def __init__(self):
         # value/suit list and predeclaration of the deck
-        values = ["Two", "Three", "Four", "Five", "Six", "Seven",
-                  "Eight", "Nine", "Jack", "Queen", "King", "Ace"]
-        suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        deck = []
+        self.values = ["Two", "Three", "Four", "Five", "Six", "Seven", \
+                        "Eight", "Nine", "Jack", "Queen", "King", "Ace"]
+        self.suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
+        self.deck = []
 
-        for suit in suits:
-            for value in values:
-                deck.append(Card(value, suit))
+        for suit in self.suits:
+            for value in self.values:
+                self.deck.append(Card(value, suit))
 
 
 def main():
