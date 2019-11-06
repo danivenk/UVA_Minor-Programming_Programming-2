@@ -1,33 +1,55 @@
-# Implements a cards shuffler and dealer.
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+version: python 3+
+cardgame.py creates a deck of cards shuffles it and deals a card
+Dani van Enk, 11823526
+"""
 
+# import library
+import random
 
 class Card:
     """
     Card class defines a card with suit and value
     
     methods:
-    getValue() - gets Card value
+    getValue() - gets Card value;
     getSuit() - gets Card suit
     """
-    # initializes a Card object
-
     def __init__(self, value, suit):
         """
-        
+        initializes the Card class
+
+        parameters:
+        value - value of the card as a string;
+        suit - suit of the card as a string
         """
         self.value = value
         self.suit = suit
 
-    # string to print when class is printed
     def __str__(self):
+        """
+        set readable for when class is printed
+
+        returns readable string
+        """
         return self.value + " of " + self.suit
 
-    # gets Card value
     def getValue(self):
+        """
+        gets value of the Card
+
+        returns Card value
+        """
         return self.value
 
-    # gets Card Suit
     def getSuit(self):
+        """
+        gets suit of the Card
+
+        returns Card suit
+        """
         return self.suit
 
 
@@ -36,26 +58,71 @@ class Deck:
     defines a deck of 52 cards
     
     methods:
-    shuffle() - shuffel the deck of cards
+    shuffle() - shuffel the deck of cards;
     deal() - pick one random card from the deck
     """
     def __init__(self):
-        # value/suit list and predeclaration of the deck
+        """
+        initializes the Deck class
+        """
         self.values = ["Two", "Three", "Four", "Five", "Six", "Seven", \
-                        "Eight", "Nine", "Jack", "Queen", "King", "Ace"]
+                        "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"]
         self.suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-        self.deck = []
+        self.cards = []
 
         for suit in self.suits:
             for value in self.values:
-                self.deck.append(Card(value, suit))
+                self.cards.append(Card(value, suit))
+
+    def __str__(self):
+        """
+        set readable for when class is printed
+
+        returns readable string
+        """
+        return f"There are {len(self.cards)} cards in the deck"
+
+    def shuffle(self):
+        """
+        shuffles the deck of cards
+        """
+        random.shuffle(self.cards)
+
+    def deal(self):
+        """
+        deals a card and removes it from the deck
+
+        returns a card
+        """
+        return self.cards.pop(0)
 
 
 def main():
     """
     runs used functions
     """
-    pass
+    dealRandomCard()
+
+def dealRandomCard():
+    deck = Deck()
+
+    print(deck)
+
+    no_of_cards = input("How many cards would you like? ")
+
+    try:
+        no_of_cards = int(no_of_cards)
+    except TypeError:
+        exit("Could not convert to integer")
+
+    deck.shuffle()
+
+    print("Your cards:")
+
+    for i in range(no_of_cards):
+        print(deck.deal())
+
+    print(deck)
 
 
 # run main
