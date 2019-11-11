@@ -44,7 +44,7 @@ class Hangman:
 	def guess(self, letter):
 		# Update the game for a guess of letter. Return True if the letter
 		# is added to the pattern, return False if it is not.
-		if len(letter) != 1 and not letter.isalpha():
+		if len(letter) != 1 or not letter.isalpha():
 			raise Exception("Please enter one letter at the time")
 
 		possible_combinations = []
