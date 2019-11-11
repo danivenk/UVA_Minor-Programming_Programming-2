@@ -106,24 +106,22 @@ def main():
     dealRandomCard()
 
 def dealRandomCard():
+    """
+    deals a random card from a deck of 52 cards
+    """
+    # create a deck
     deck = Deck()
 
+    # print current state of the deck
     print(deck.description())
 
-    no_of_cards = input("How many cards would you like? ")
-
-    try:
-        no_of_cards = int(no_of_cards)
-    except TypeError:
-        exit("Could not convert to integer")
-
+    # shuffles the deck
     deck.shuffle()
+    
+    # deal a card
+    print(deck.deal())
 
-    print("Your cards:")
-
-    for i in range(no_of_cards):
-        print(deck.deal())
-
+    # print current state of the deck
     print(deck.description())
 
 
