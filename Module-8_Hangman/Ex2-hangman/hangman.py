@@ -47,7 +47,6 @@ class Hangman:
 		if len(letter) != 1 and not letter.isalpha():
 			raise Exception("Please enter one letter at the time")
 
-
 		possible_combinations = []
 
 		self.guessed_letters += letter
@@ -106,7 +105,7 @@ class Hangman:
 
 	def finished(self):
 		# Return True if the game is finished, otherwise False.
-		if self.guesses >= self.num_guesses or self.guesses >= 26:
+		if self.guesses >= self.num_guesses or self.guesses == 26:
 			return True
 		else:
 			return False
