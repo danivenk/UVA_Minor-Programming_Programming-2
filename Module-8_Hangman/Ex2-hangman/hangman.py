@@ -48,6 +48,7 @@ class Hangman:
 			raise Exception("Please enter one letter at the time")
 
 		possible_combinations = []
+		self.guesses += 1
 
 		self.guessed_letters += letter
 
@@ -85,7 +86,6 @@ class Hangman:
 		if letter in self.guess_string:
 			return True
 		else:
-			self.guesses += 1
 			return False
 
 
