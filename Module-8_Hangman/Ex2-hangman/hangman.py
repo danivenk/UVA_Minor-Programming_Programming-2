@@ -27,7 +27,7 @@ class Hangman:
 	def __init__(self, length, num_guesses):
 		if length < 1:
 			raise Exception("Hangman word needs to have positive length.")
-		if num_guesses < 1 or num_guesses > 26:
+		if num_guesses < 1:
 			raise Exception("You need at least one guess to play Hangman.")
 
 		self.length = length
@@ -44,10 +44,10 @@ class Hangman:
 	def guess(self, letter):
 		# Update the game for a guess of letter. Return True if the letter
 		# is added to the pattern, return False if it is not.
-		if len(letter) != 1:
+		if len(letter) != 1 and not letter.isalpha():
 			raise Exception("Please enter one letter at the time")
 
-		
+
 		possible_combinations = []
 
 		self.guessed_letters += letter
@@ -106,7 +106,7 @@ class Hangman:
 
 	def finished(self):
 		# Return True if the game is finished, otherwise False.
-		if self.guesses >= self.num_guesses:
+		if self.guesses >= self.num_guesses or self.guesses >= 26:
 			return True
 		else:
 			return False
