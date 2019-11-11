@@ -14,6 +14,7 @@ class Card:
     Card class defines a card with suit and value
     
     methods:
+    description() - returns description of the Card class;
     getValue() - gets Card value;
     getSuit() - gets Card suit
     """
@@ -28,13 +29,13 @@ class Card:
         self.value = value
         self.suit = suit
 
-    def __str__(self):
+    def description(self):
         """
-        set readable for when class is printed
+        return description of the Card class
 
         returns readable string
         """
-        return self.value + " of " + self.suit
+        return f"{self.value} of {self.suit}"
 
     def getValue(self):
         """
@@ -58,6 +59,7 @@ class Deck:
     defines a deck of 52 cards
     
     methods:
+    description() - returns description of the Deck class;
     shuffle() - shuffel the deck of cards;
     deal() - pick one random card from the deck
     """
@@ -74,9 +76,9 @@ class Deck:
             for value in self.values:
                 self.cards.append(Card(value, suit))
 
-    def __str__(self):
+    def description(self):
         """
-        set readable for when class is printed
+        return description of the Deck class
 
         returns readable string
         """
@@ -106,7 +108,7 @@ def main():
 def dealRandomCard():
     deck = Deck()
 
-    print(deck)
+    print(deck.description())
 
     no_of_cards = input("How many cards would you like? ")
 
@@ -122,7 +124,7 @@ def dealRandomCard():
     for i in range(no_of_cards):
         print(deck.deal())
 
-    print(deck)
+    print(deck.description())
 
 
 # run main
