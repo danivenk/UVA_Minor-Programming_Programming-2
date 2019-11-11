@@ -26,8 +26,8 @@ class Card:
         value - value of the card as a string;
         suit - suit of the card as a string
         """
-        self.value = value
-        self.suit = suit
+        self._value = value
+        self._suit = suit
 
     def description(self):
         """
@@ -35,7 +35,7 @@ class Card:
 
         returns readable string
         """
-        return f"{self.value} of {self.suit}"
+        return f"{self._value} of {self._suit}"
 
     def getValue(self):
         """
@@ -43,7 +43,7 @@ class Card:
 
         returns Card value
         """
-        return self.value
+        return self._value
 
     def getSuit(self):
         """
@@ -51,7 +51,7 @@ class Card:
 
         returns Card suit
         """
-        return self.suit
+        return self._suit
 
 
 class Deck:
@@ -67,13 +67,13 @@ class Deck:
         """
         initializes the Deck class
         """
-        self.values = ["Two", "Three", "Four", "Five", "Six", "Seven", \
+        self._values = ["Two", "Three", "Four", "Five", "Six", "Seven", \
                         "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"]
-        self.suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
+        self._suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
         self.cards = []
 
-        for suit in self.suits:
-            for value in self.values:
+        for suit in self._suits:
+            for value in self._values:
                 self.cards.append(Card(value, suit))
 
     def description(self):
