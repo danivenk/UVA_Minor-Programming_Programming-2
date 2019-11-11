@@ -50,7 +50,7 @@ class Hangman:
 			raise Exception("Please enter one letter at the time")
 		if not letter.isalpha():
 			raise Exception("Please only enter alphabetical characters")
-		if letter not in self.guessed_letters:
+		if letter in self.guessed_letters:
 			raise Exception("Already guessed that letter")
 
 		possible_combinations = []
