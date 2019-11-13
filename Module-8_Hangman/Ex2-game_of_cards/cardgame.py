@@ -28,6 +28,7 @@ class Card:
         value - value of the card as a string;
         suit - suit of the card as a string
         """
+        
         self.value = value
         self.suit = suit
 
@@ -37,6 +38,7 @@ class Card:
 
         returns readable string
         """
+
         return f"{self.value} of {self.suit}"
 
     def getValue(self):
@@ -45,6 +47,7 @@ class Card:
 
         returns Card value
         """
+        
         return self.value
 
     def getSuit(self):
@@ -53,6 +56,7 @@ class Card:
 
         returns Card suit
         """
+
         return self.suit
 
 
@@ -70,6 +74,7 @@ class Deck:
         """
         initializes the Deck class
         """
+
         self._values = ['A', '2', '3', '4', '5', '6', '7', '8', '9',
                         '10', 'J', 'Q', 'K']
         self._suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
@@ -85,12 +90,14 @@ class Deck:
 
         returns readable string
         """
+
         return f"There are {len(self._cards)} cards in the deck"
 
     def shuffle(self):
         """
         shuffles the deck of cards
         """
+
         random.shuffle(self._cards)
 
     def deal(self):
@@ -99,6 +106,7 @@ class Deck:
 
         returns a card
         """
+
         return self._cards.pop()
 
 
@@ -106,6 +114,7 @@ def main():
     """
     runs used functions
     """
+
     dealRandomCard()
 
 
@@ -113,6 +122,7 @@ def dealRandomCard():
     """
     deals a random card from a deck of 52 cards
     """
+
     # create a deck
     deck = Deck()
 
