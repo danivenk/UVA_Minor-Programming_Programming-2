@@ -38,7 +38,7 @@ class Lexicon:
 
 class Hangman:
 	def __init__(self, length, num_guesses):
-		assert length > 0
+		assert length > 0 and num_guesses > 0
 
 		self.length = length
 		self.num_guesses = num_guesses
