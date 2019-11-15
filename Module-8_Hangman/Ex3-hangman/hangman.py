@@ -1,4 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+version: python 3+
+hangman.py creates a game of hangman
+Dani van Enk, 11823526
+"""
+
+
+# import library
 import os
+
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -21,14 +32,13 @@ class Lexicon:
 			if len(word) == length:
 				getting_words.append(word)
 
+		assert len(getting_words) > 0
+
 		return getting_words
 
 class Hangman:
 	def __init__(self, length, num_guesses):
-		if length < 1:
-			raise Exception("Hangman word needs to have positive length.")
-		if num_guesses < 1:
-			raise Exception("You need at least one guess to play Hangman.")
+		assert length > 0
 
 		self.length = length
 		self.num_guesses = num_guesses
@@ -46,12 +56,9 @@ class Hangman:
 		# is added to the pattern, return False if it is not.
 		letter = letter.lower()
 
-		if len(letter) != 1:
-			raise Exception("Please enter one letter at the time")
-		if not letter.isalpha():
-			raise Exception("Please only enter alphabetical characters")
+		assert len(letter) == 1 and letter.isalpha()
 		if letter in self.guessed_letters:
-			raise Exception("Already guessed that letter")
+			return True
 
 		possible_combinations = []
 		self.guesses += 1
@@ -144,12 +151,25 @@ class Hangman:
 		return class_str
 
 def main():
-	game = Hangman(4, 4)
-	guessing = ["x", "y", "z"]
-	for letter in guessing:
-		game.guess(letter)
+	game_play(4, 26, True)
+
+def game_play(length, num_guesses, statistics):
+	game = Hangman(length, num_guesses)
+
+	print("WELCOME TO EVIL HANGMAN >=)")
+	print(f"I have a word in mind of {length} letters")
+
+	while not game.finished():
+		letter = input("Guess a letter: ")
+		if game.guess(letter):
+			print(f"The letter {letter} is in the word :(")
+		else:
+			print(f"The letter {letter} is not in the word >=)")
 		print(game.pattern())
-	# print(str(len(game.words)) + ", " + str(game.words))
+
+		if statistics:
+			print(game)
+		
 
 if __name__ == "__main__":
 	main()
