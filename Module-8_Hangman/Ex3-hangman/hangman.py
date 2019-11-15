@@ -118,15 +118,16 @@ class Hangman:
 
 	def finished(self):
 		# Return True if the game is finished, otherwise False.
-		if self.guesses >= self.num_guesses or self.guesses == 26:
+		if self.won():
 			return True
-		else:
+		elif self.lost():
 			return False
 
 	def won(self):
 		# Return True if the game is finished and the player has won,
 		# otherwise False.
-		if self.finished() and "_" not in self.guess_string:
+		if (self.guesses >= self.num_guesses or self.guesses == 26) \
+			or "_" not in self.guess_string:
 			return True
 		else:
 			return False
@@ -134,7 +135,8 @@ class Hangman:
 	def lost(self):
 		# Return True if the game is finished and the player has lost,
 		# otherwise False.
-		if self.finished() and "_" in self.guess_string:
+		if (self.guesses >= self.num_guesses or self.guesses == 26) \
+			or "_" in self.guess_string:
 			return True
 		else:
 			return False
@@ -142,18 +144,39 @@ class Hangman:
 	def __str__(self):
 		# Return a string representation of the game with some relevant
 		# statistics.
-		class_str = "letters guessed are " + self.guessed_letters + ", "+ str(len(self.words)) +" words remaining, game "
-		if self.won():
-			class_str += "won"
-		else:
-			class_str += "not won"
+		class_str = f"letters guessed are {self.guessed_letters}, \
+					{len(self.words)} words remaining, guesses remaining \
+					{self.num_guesses - self.guesses}"
 
 		return class_str
 
 def main():
-	game_play(4, 26, True)
+	user_length = get_number("With what length of a word would you like to play? ")
+	
+	user_guesses = get_number("How many guesses would you like? ")
+	while 1:
+		user_statistics = input("Would you like to see statistics of the game while playing? (y/n) ")
+		if user_statistics[0].lower() == "y":
+			user_stat = True
+			break
+		elif user_statistics[0].lower() == "n":
+			user_stat = False
+			break
+	
+	game_play(user_length, user_guesses, user_stat)
+
+def get_number(text):
+	number = input(text)
+
+	try:
+		integer = int(number)
+	except ValueError:
+		get_number(text)
+
+	return integer
 
 def game_play(length, num_guesses, statistics):
+
 	game = Hangman(length, num_guesses)
 
 	print("WELCOME TO EVIL HANGMAN >=)")
