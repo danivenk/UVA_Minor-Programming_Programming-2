@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 version: python 3+
-cardgame.py creates a deck of cards shuffles it and deals a card
+cardgame.py creates a deck of cards shuffles it and deals 4 cards
 Dani van Enk, 11823526
 """
 
@@ -115,16 +115,17 @@ def main():
     runs used functions
     """
 
-    dealRandomCard()
+    # create a deck
+    deck = Deck()
+    
+    for i in range(4):
+        dealRandomCard(deck)
 
 
-def dealRandomCard():
+def dealRandomCard(deck):
     """
     deals a random card from a deck of 52 cards
     """
-
-    # create a deck
-    deck = Deck()
 
     # print current state of the deck
     print(deck.description())
