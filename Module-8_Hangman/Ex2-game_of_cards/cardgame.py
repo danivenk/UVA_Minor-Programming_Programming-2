@@ -106,7 +106,7 @@ class Deck:
 
         returns a card
         """
-
+        assert len(self._cards) > 0
         return self._cards.pop()
 
 
@@ -124,7 +124,7 @@ def main():
 
 def dealRandomCard(deck):
     """
-    deals a random card from a deck of 52 cards
+    deals a random card from a deck of cards
     """
 
     # print current state of the deck
@@ -134,10 +134,7 @@ def dealRandomCard(deck):
     deck.shuffle()
 
     # deal a card
-    print(deck.deal().description())
-
-    # print current state of the deck
-    print(deck.description())
+    print(f"you've drawn the: {deck.deal().description()}")
 
 
 # run main
