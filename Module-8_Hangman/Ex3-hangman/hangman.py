@@ -56,7 +56,8 @@ class Hangman:
 		# is added to the pattern, return False if it is not.
 		letter = letter.lower()
 
-		assert len(letter) == 1 and letter.isalpha()
+		assert len(letter) == 1
+		assert letter.isalpha()
 		if letter in self.guessed_letters:
 			return True
 
