@@ -54,13 +54,9 @@ class Hangman:
 	def guess(self, letter):
 		# Update the game for a guess of letter. Return True if the letter
 		# is added to the pattern, return False if it is not.
-		letter = str(letter)
+		letter = str(letter).lower()
 
-		assert letter.isalpha() and len(letter) == 1
-
-		letter = letter.lower()
-		if letter in self.guessed_letters:
-			return True
+		assert letter.isalpha() and len(letter) == 1 and letter not in self.guessed_letters
 
 		possible_combinations = []
 		self.guesses += 1
