@@ -119,16 +119,15 @@ class Hangman:
 
 	def finished(self):
 		# Return True if the game is finished, otherwise False.
-		if self.won():
+		if self.guesses >= self.num_guesses or self.guesses == 26:
 			return True
-		elif self.lost():
+		else:
 			return False
 
 	def won(self):
 		# Return True if the game is finished and the player has won,
 		# otherwise False.
-		if (self.guesses >= self.num_guesses or self.guesses == 26) \
-			or "_" not in self.guess_string:
+		if self.finished() and "_" not in self.guess_string:
 			return True
 		else:
 			return False
@@ -136,8 +135,7 @@ class Hangman:
 	def lost(self):
 		# Return True if the game is finished and the player has lost,
 		# otherwise False.
-		if (self.guesses >= self.num_guesses or self.guesses == 26) \
-			or "_" in self.guess_string:
+		if self.finished() and "_" in self.guess_string:
 			return True
 		else:
 			return False
