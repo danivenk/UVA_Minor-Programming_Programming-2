@@ -59,7 +59,7 @@ class Hangman:
 		assert letter.isalpha()
 		assert len(letter) == 1
 		if letter in self.guessed_letters:
-			return False
+			return True
 
 		possible_combinations = []
 		self.guesses += 1
