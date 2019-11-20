@@ -253,7 +253,7 @@ class Hangman:
 		
 		# statistics of the game, guessed_letters, number of words left
 		#	and guesses left
-		class_str = f"letters guessed are {self.guessed_letters}," + \
+		class_str = f"letters guessed are {self.guessed_letters}, " + \
 					f"{len(self.words)} words remaining, guesses remaining" + \
 					f"{self.num_guesses - self.guesses}"
 
