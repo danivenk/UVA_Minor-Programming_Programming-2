@@ -275,18 +275,21 @@ def main():
 	user_guesses = cs50.get_int("How many guesses would you like? ")
 
 	# promts user for statistic and converts it to a bool
-	while 1:
-		user_statistics = input("Would you like to see statistics" + \
-								" of the game while playing? (y/n) ")
-		if user_statistics[0].lower() == "y":
-			user_stat = True
-			break
-		elif user_statistics[0].lower() == "n":
-			user_stat = False
-			break
+	user_stat = yes_or_no("Would you like to see statistics of " + \
+							"the game while playing? (y/n) ")
 	
 	# plays a game of hangman
 	game_play(user_length, user_guesses, user_stat)
+
+
+def yes_or_no(text):
+	user_input = input(text)
+	if user_input[0].lower() == "y":
+		return True
+	elif user_input[0].lower() == "n":
+		return False
+	else:
+		yes_or_no(text)
 
 
 def game_play(length, num_guesses, statistics):
@@ -322,6 +325,18 @@ def game_play(length, num_guesses, statistics):
 		# print statistics
 		if statistics:
 			print(game)
+
+	if game.won():
+		print("Congrats :( you guessed the word")
+	elif game.lost():
+		print(f"You lost >=) the word was {game.consistent_word()}")
+
+	# pomt user if she wants to play again
+	again = yes_or_no("Would you like to play again? (y/n) ")
+
+	# play again if user wants to
+	if again:
+		main()
 		
 
 # run main
