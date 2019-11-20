@@ -6,38 +6,85 @@ hangman.py creates a game of hangman
 Dani van Enk, 11823526
 """
 
-
 # import library
 import os
 
-
+# path to directory where this file is located
 PATH = os.path.dirname(os.path.abspath(__file__))
+
+# number of letters in the alphabet
+ALPHA = 26
 
 
 class Lexicon:
+	"""
+	the Lexicon class defines a word list with word from the dictionary
+
+	methods:
+	get_words() - gets a list of all words of a certain length in the dictionary
+	"""
+
 	def __init__(self):
+		"""
+		initializes the wordlist from the dictionary file
+		"""
+
 		self.words = []
 
-		dictionary = open(PATH + "/dictionary.txt", "r")
-
-		for line in dictionary:
-			word = line.strip("\n")
-			self.words.append(word)
-
-		dictionary.close()
+		# append each word in the dictionary file to the word list
+		with open(PATH + "/dictionary.txt", "r") as file:
+			for line in file:
+				word = line.strip("\n")
+				self.words.append(word)
 
 	def get_words(self, length):
+		"""
+		gets a word list with words of length from the dictionary
+
+		parameters:
+		length - length of the words in the returned word list
+
+		returns a word list
+		"""
+
 		getting_words = []
+
+		# checking for withs with of len length and appending them to the list
 		for word in self.words:
 			if len(word) == length:
 				getting_words.append(word)
 
+		# assume getting_words is not empty
 		assert len(getting_words) > 0
 
 		return getting_words
 
 class Hangman:
+	"""
+	defines a hangman game
+
+	methods:
+	guess()				- guesses a letter;
+	pattern()			- returns the current play pattern;
+	guess_string()		- returns guessed letters;
+	consistent_word()	- returns a word consistent with current play pattern;
+	finished()			- checks if the game is finished;
+	won()				- checks if the game is won;
+	lost()				- checks if the game is lost
+	"""
+
 	def __init__(self, length, num_guesses):
+		"""
+		initializes a game of hangman
+
+		gives an error if length not positive or number of guesses not positive
+
+		parameters:
+		length		- length of the hangman word
+		num_guesses	- maximum number of guesses
+		"""
+
+		# assume length not 0 and there are more than 0 guesses
 		assert length > 0 and num_guesses > 0
 
 		self.length = length
@@ -47,9 +94,7 @@ class Hangman:
 		self.words = self.lex.get_words(length)
 		self.guess_string = ""
 		self.guessed_letters = ""
-
-		for i in range(length):
-			self.guess_string += "_"
+		self.guess_string = length * "_"
 
 	def guess(self, letter):
 		# Update the game for a guess of letter. Return True if the letter
@@ -116,7 +161,7 @@ class Hangman:
 
 	def finished(self):
 		# Return True if the game is finished, otherwise False.
-		if self.guesses >= self.num_guesses or self.guesses == 26:
+		if self.guesses >= self.num_guesses or self.guesses == ALPHA:
 			return True
 		else:
 			return False
