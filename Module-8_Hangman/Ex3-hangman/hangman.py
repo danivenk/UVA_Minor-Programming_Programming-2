@@ -2,15 +2,19 @@
 # -*- coding: utf-8 -*-
 """
 version: python 3+
-hangman.py creates a game of hangman
+hangman.py creates a game of evil hangman
 Dani van Enk, 11823526
 """
 
+
 # import library
 import os
+import cs50
+
 
 # path to directory where this file is located
 PATH = os.path.dirname(os.path.abspath(__file__))
+
 
 # number of letters in the alphabet
 ALPHA = 26
@@ -59,9 +63,10 @@ class Lexicon:
 
 		return getting_words
 
+
 class Hangman:
 	"""
-	defines a hangman game
+	defines a evil hangman game
 
 	methods:
 	guess()				- guesses a letter;
@@ -254,12 +259,25 @@ class Hangman:
 
 		return class_str
 
+
 def main():
-	user_length = get_number("With what length of a word would you like to play? ")
+	"""
+	promts user for word length, max number of guesses and
+		if user wants statistics to be shown and
+		plays a game of evil hangman with those parameters
+	"""
+
+	# promts user for word length
+	user_length = cs50.get_int("With what length of a word" + \
+								" would you like to play? ")
 	
-	user_guesses = get_number("How many guesses would you like? ")
+	# promts user for max number of guessess
+	user_guesses = cs50.get_int("How many guesses would you like? ")
+
+	# promts user for statistic and converts it to a bool
 	while 1:
-		user_statistics = input("Would you like to see statistics of the game while playing? (y/n) ")
+		user_statistics = input("Would you like to see statistics" + \
+								" of the game while playing? (y/n) ")
 		if user_statistics[0].lower() == "y":
 			user_stat = True
 			break
@@ -267,36 +285,45 @@ def main():
 			user_stat = False
 			break
 	
+	# plays a game of hangman
 	game_play(user_length, user_guesses, user_stat)
 
-def get_number(text):
-	number = input(text)
-
-	try:
-		integer = int(number)
-	except ValueError:
-		get_number(text)
-
-	return integer
 
 def game_play(length, num_guesses, statistics):
+	"""
+	plays a game of evil 
+	
+	parameters:
+	length		- length of the word to be guessed
+	num_guesses	- maximum number of guesses
+	statistics	- bool if statistics it to be shown
+	"""
 
+	# create evil hangman object
 	game = Hangman(length, num_guesses)
 
+	# greeting
 	print("WELCOME TO EVIL HANGMAN >=)")
 	print(f"I have a word in mind of {length} letters")
 
+	# evil hangman rounds untill finished
 	while not game.finished():
+
+		# guess letter
 		letter = input("Guess a letter: ")
 		if game.guess(letter):
 			print(f"The letter {letter} is in the word :(")
 		else:
 			print(f"The letter {letter} is not in the word >=)")
+
+		# print pattern
 		print(game.pattern())
 
+		# print statistics
 		if statistics:
 			print(game)
 		
 
+# run main
 if __name__ == "__main__":
 	main()
