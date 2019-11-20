@@ -14,11 +14,11 @@ class Queue:
     defines a queue
 
     methods:
-    enqueue() - appends an item to the queue;
-    dequeue() - returns the first item in the queue and removes it;
-    peek() - returns the first item in the queue;
-    size() - returns the size of the queue;
-    empty() - empties the queue
+    enqueue()   - appends an item to the queue;
+    dequeue()   - returns the first item in the queue and removes it;
+    peek()      - returns the first item in the queue;
+    size()      - returns the size of the queue;
+    empty()     - empties the queue
     """
 
     def __init__(self):

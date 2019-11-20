@@ -15,9 +15,9 @@ class Card:
     Card class defines a card with suit and value
 
     methods:
-    description() - returns description of the Card class;
-    getValue() - gets Card value;
-    getSuit() - gets Card suit
+    description()   - returns description of the Card class;
+    getValue()      - gets Card value;
+    getSuit()       - gets Card suit
     """
 
     def __init__(self, value, suit):
@@ -25,8 +25,8 @@ class Card:
         initializes the Card class
 
         parameters:
-        value - value of the card as a string;
-        suit - suit of the card as a string
+        value   - value of the card as a string;
+        suit    - suit of the card as a string
         """
         
         self.value = value
@@ -65,9 +65,9 @@ class Deck:
     defines a deck of 52 cards
 
     methods:
-    description() - returns description of the Deck class;
-    shuffle() - shuffel the deck of cards;
-    deal() - pick one random card from the deck
+    description()   - returns description of the Deck class;
+    shuffle()       - shuffel the deck of cards;
+    deal()          - pick one random card from the deck
     """
 
     def __init__(self):
