@@ -153,13 +153,13 @@ class Hangman:
 				possible_combinations.append([letter_pos_string, 1, [word]])
 			else:
 
-				# loop over each item in possible combinations
-				for item in possible_combinations:
+				# loop over each family in possible combinations
+				for family in possible_combinations:
 
 					# count words for each possible combinations and save words
-					if letter_pos_string in item:
-						item[1] += 1
-						item[2].append(word)
+					if letter_pos_string in family:
+						family[1] += 1
+						family[2].append(word)
 						word_added = True
 						break
 
@@ -167,16 +167,16 @@ class Hangman:
 				if not word_added:
 					possible_combinations.append([letter_pos_string, 1, [word]])
 
-		# dummy counter
-		dummy = 0
+		# largest_word_list counter
+		largest_word_list = 0
 
 		# find the possible combination with the most words associated
-		for item in possible_combinations:
+		for family in possible_combinations:
 			# if found combination with more words
-			if len(item[2]) > dummy:
-				dummy = len(item[2])
-				self.words = item[2]
-				self.guess_string = item[0]
+			if len(family[2]) > largest_word_list:
+				largest_word_list = len(family[2])
+				self.words = family[2]
+				self.guess_string = family[0]
 
 		# return true if letter is added else false
 		if letter in self.guess_string:
