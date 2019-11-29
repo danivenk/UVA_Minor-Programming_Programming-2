@@ -22,7 +22,7 @@ class Adventure():
         line = file.readline()
 
         while (line != "\n"):
-            line_data = line.strip("\n").split("\t")
+            line_data = line.strip("\n").rstrip().split("\t")
 
             self.rooms[int(line_data[0])] = Room(int(line_data[0]), line_data[1], line_data[2])
 
@@ -31,7 +31,7 @@ class Adventure():
         line = file.readline()
 
         while (line != "\n"):
-            line_data = line.strip("\n").split("\t")
+            line_data = line.strip("\n").rstrip().split("\t")
 
             editing_room_no = int(line_data[0])
 
@@ -43,7 +43,7 @@ class Adventure():
         file.close()
 
         for room in self.rooms:
-            print(room, self.rooms[room].connections)
+            print(self.rooms[room], self.rooms[room].connections)
 
 
     # Pass along the description of the current room
@@ -52,6 +52,9 @@ class Adventure():
             return self.current_room.name
         else:
             return self.current_room.description
+
+    def get_long_description(self):
+        return self.current_room.description
 
     # Move to a different room by changing "current" room, if possible
     def move(self, direction):
@@ -98,13 +101,21 @@ if __name__ == "__main__":
         # Prompt
         command = input("> ").lower()
 
-        # Perform move or other command
-        while (not adventure.move(command)):
-            print("Invalid command")
-            command = input("> ").lower()
-
-        print(adventure.get_description())
-
         # Escape route
         if command == "quit":
             break
+        elif command == "help":
+            print("You can move by typing directions such as EAST/WEST/IN/OUT")
+            print("QUIT quits the game.")
+            print("INVENTORY lists the item in your inventory.")
+            print("LOOK lists the complete description of the room and its contents.")
+            print("TAKE <item> take item from the room.")
+            print("DROP <item> drop item from your inventory.")
+        elif command == "look":
+            print(adventure.get_long_description())
+        else:
+            while (not adventure.move(command)):
+                print("Invalid command")
+                command = input("> ").lower()
+
+            print(adventure.get_description())
