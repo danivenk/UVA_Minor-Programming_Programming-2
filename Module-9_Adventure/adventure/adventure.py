@@ -17,18 +17,55 @@ class Adventure():
 
     # Load rooms from filename in two-step process
     def load_rooms(self, filename):
-        # TODO
-        pass
+        file = open(filename, "r")
+
+        line = file.readline()
+
+        while (line != "\n"):
+            line_data = line.strip("\n").split("\t")
+
+            self.rooms[int(line_data[0])] = Room(int(line_data[0]), line_data[1], line_data[2])
+
+            line = file.readline()
+
+        line = file.readline()
+
+        while (line != "\n"):
+            line_data = line.strip("\n").split("\t")
+
+            editing_room_no = int(line_data[0])
+
+            for data in range(1, len(line_data), 2):
+                self.rooms[editing_room_no].add_connection(line_data[data], self.rooms[int(line_data[data + 1])])
+
+            line = file.readline()
+
+        file.close()
+
+        for room in self.rooms:
+            print(room, self.rooms[room].connections)
+
 
     # Pass along the description of the current room
     def get_description(self):
-        # TODO
-        pass
+        if self.current_room.get_visited():
+            return self.current_room.name
+        else:
+            return self.current_room.description
 
     # Move to a different room by changing "current" room, if possible
     def move(self, direction):
-        # TODO
-        pass
+        if not self.current_room.has_connection(direction):
+            return False
+
+        if not self.current_room.get_visited():
+            self.current_room.set_visited()
+
+        move_room = self.current_room.get_connection(direction)
+
+        self.current_room = move_room
+
+        return True
 
 
 if __name__ == "__main__":
@@ -62,7 +99,11 @@ if __name__ == "__main__":
         command = input("> ").lower()
 
         # Perform move or other command
-        # TODO
+        while (not adventure.move(command)):
+            print("Invalid command")
+            command = input("> ").lower()
+
+        print(adventure.get_description())
 
         # Escape route
         if command == "quit":
