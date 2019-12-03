@@ -209,8 +209,12 @@ if __name__ == "__main__":
 
         elif command == "inventory":
             inventory = adventure.get_inventory()
-            for item in inventory.values():
-                print(item)
+            if len(inventory) > 0:
+                for item in inventory.values():
+                    print(item)
+                continue
+
+            print("Your inventory is empty.")
         else:
             if not adventure.move(command):
                 print("Invalid command")
