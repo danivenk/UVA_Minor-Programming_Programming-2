@@ -178,12 +178,12 @@ if __name__ == "__main__":
         if command == "quit":
             break
         elif command == "help":
-            print("You can move by typing directions such as EAST/WEST/IN/OUT")
-            print("QUIT quits the game.")
-            print("INVENTORY lists the item in your inventory.")
-            print("LOOK lists the complete description of the room and its contents.")
-            print("TAKE <item> take item from the room.")
-            print("DROP <item> drop item from your inventory.")
+            print("You can move by typing directions such as EAST/WEST/IN/OUT" + \
+            "QUIT quits the game." + \
+            "INVENTORY lists the item in your inventory." + \
+            "LOOK lists the complete description of the room and its contents." + \
+            "TAKE <item> take item from the room." + \
+            "DROP <item> drop item from your inventory.")
         elif command == "look":
             print(adventure.get_long_description())
             adventure.get_items()
