@@ -1,4 +1,5 @@
 from room import Room
+from item import Item
 
 class Adventure():
 
@@ -7,6 +8,8 @@ class Adventure():
 
         # Rooms is a dictionary that maps a room number to the corresponding room object
         self.rooms = {}
+
+        self.inventory = {}
 
         # Load room structures
         self.load_rooms(f"data/{game}Adv.dat")
@@ -22,7 +25,7 @@ class Adventure():
         line = file.readline()
 
         while (line != "\n"):
-            line_data = line.strip("\n").rstrip().split("\t")
+            line_data = line.strip("\n").split("\t")
 
             self.rooms[int(line_data[0])] = Room(int(line_data[0]), line_data[1], line_data[2])
 
@@ -31,19 +34,31 @@ class Adventure():
         line = file.readline()
 
         while (line != "\n"):
-            line_data = line.strip("\n").rstrip().split("\t")
+            line_data = line.strip("\n").split("\t")
 
             editing_room_no = int(line_data[0])
 
             for data in range(1, len(line_data), 2):
-                self.rooms[editing_room_no].add_connection(line_data[data], self.rooms[int(line_data[data + 1])])
+                if "/" in line_data[data + 1]:
+                    conditional_room = line_data[data + 1].split("/")
+                    self.rooms[editing_room_no].add_connection(line_data[data], self.rooms[int(conditional_room[0])], conditional_room[1])
+                else:
+                    self.rooms[editing_room_no].add_connection(line_data[data], self.rooms[int(line_data[data + 1])])
+
+            line = file.readline()
+
+        line = file.readline()
+
+        while (line != ""):
+            line_data = line.strip("\n").split("\t")
+
+            new_item = Item(line_data[0], line_data[1])
+
+            self.rooms[int(line_data[2])].add_item(new_item, line_data[0])
 
             line = file.readline()
 
         file.close()
-
-        for room in self.rooms:
-            print(self.rooms[room], self.rooms[room].connections)
 
 
     # Pass along the description of the current room
@@ -66,9 +81,40 @@ class Adventure():
 
         move_room = self.current_room.get_connection(direction)
 
-        self.current_room = move_room
+        for item in self.inventory:
+            if item in move_room:
+                self.current_room = move_room[item]
+                return True
+        self.current_room = move_room[""]
 
         return True
+
+    def is_forced(self):
+        if self.current_room.has_connection("forced"):
+            return True
+        return False
+
+    def get_items(self):
+        room_items = self.current_room.get_items()
+
+        for item in room_items.values():
+            print(item)
+    
+    def add_to_inventory(self, item_name):
+        pickup_item = self.current_room.pick_up_item(item_name)
+        if pickup_item != None:
+            self.inventory[item_name] = pickup_item
+            return True
+        return False
+    
+    def del_from_inventory(self, item_name):
+        if item_name in self.inventory:
+            self.inventory.pop(item_name)
+            return True
+        return False
+
+    def get_inventory(self):
+        return self.inventory
 
 
 if __name__ == "__main__":
@@ -94,12 +140,21 @@ if __name__ == "__main__":
 
     # Print very first room description
     print(adventure.get_description())
+    adventure.get_items()
 
     # Prompt the user for commands until they type QUIT
     while True:
 
         # Prompt
         command = input("> ").lower()
+
+        split = False
+
+        if " " in command:
+            commands = command.split(" ")
+            command = commands.pop(0)
+            parameter = commands
+            split = True
 
         # Escape route
         if command == "quit":
@@ -113,9 +168,39 @@ if __name__ == "__main__":
             print("DROP <item> drop item from your inventory.")
         elif command == "look":
             print(adventure.get_long_description())
-        else:
-            while (not adventure.move(command)):
+            adventure.get_items()
+        elif command == "take":
+            if not split:
                 print("Invalid command")
-                command = input("> ").lower()
+                continue
+            elif not adventure.add_to_inventory(parameter[0]) or len(parameter) != 1:
+                print("No such item.")
+                continue
+
+            print(f"{parameter[0]} taken.")
+        elif command == "drop":
+            if not split:
+                print("Invalid command")
+                continue
+            elif not adventure.del_from_inventory(parameter[0]) or len(parameter) != 1:
+                print("No such item.")
+                continue
+
+            print(f"{parameter[0]} dropped.")
+
+        elif command == "inventory":
+            inventory = adventure.get_inventory()
+            for item in inventory.values():
+                print(item)
+        else:
+            if not adventure.move(command):
+                print("Invalid command")
+                continue
 
             print(adventure.get_description())
+            adventure.get_items()
+
+            while adventure.is_forced():
+                adventure.move("forced")
+                print(adventure.get_long_description())
+
