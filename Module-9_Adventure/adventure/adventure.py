@@ -64,12 +64,12 @@ class Adventure():
     # Pass along the description of the current room
     def get_description(self):
         if self.current_room.get_visited():
-            return self.current_room.name
+            return self.current_room.get_name()
         else:
-            return self.current_room.description
+            return self.current_room.get_description()
 
     def get_long_description(self):
-        return self.current_room.description
+        return self.current_room.get_description()
 
     # Move to a different room by changing "current" room, if possible
     def move(self, direction):
@@ -117,6 +117,19 @@ class Adventure():
         return self.inventory
 
 
+def get_synonyms():
+    with open("data/Synonyms.dat") as file:
+        synonyms_dict = {}
+
+        for line in file:
+            line = line.lower().strip("\n")
+            synonyms = line.split("=")
+
+            synonyms_dict[synonyms[0]] = synonyms[1]
+
+        return synonyms_dict
+
+
 if __name__ == "__main__":
     
     from sys import argv
@@ -134,6 +147,8 @@ if __name__ == "__main__":
 
     # Create game
     adventure = Adventure(game_name)
+
+    synonyms = get_synonyms()
 
     # Welcome user
     print("Welcome to Adventure.\n")
@@ -155,6 +170,9 @@ if __name__ == "__main__":
             command = commands.pop(0)
             parameter = commands
             split = True
+
+        if command in synonyms:
+            command = synonyms[command]
 
         # Escape route
         if command == "quit":

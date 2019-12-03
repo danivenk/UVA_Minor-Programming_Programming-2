@@ -13,6 +13,12 @@ class Room(object):
         self.description = description
         self.visited = False
 
+    def get_name(self):
+        return self.name
+
+    def get_description(self):
+        return self.description
+
     # Adds a given direction and the connected room to our room object.
     def add_connection(self, direction, room, condition=""):
         direction = direction.lower()
