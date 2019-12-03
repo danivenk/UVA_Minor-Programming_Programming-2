@@ -109,7 +109,7 @@ class Adventure():
     
     def del_from_inventory(self, item_name):
         if item_name in self.inventory:
-            self.inventory.pop(item_name)
+            self.current_room.add_item(self.inventory.pop(item_name), item_name)
             return True
         return False
 
