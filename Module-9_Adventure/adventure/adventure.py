@@ -221,5 +221,5 @@ if __name__ == "__main__":
 
             while adventure.is_forced():
                 adventure.move("forced")
-                print(adventure.get_long_description())
+                print(adventure.get_description())
 
