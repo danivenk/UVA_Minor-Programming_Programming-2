@@ -196,7 +196,7 @@ if __name__ == "__main__":
                 print("No such item.")
                 continue
 
-            print(f"{parameter[0]} taken.")
+            print(f"{parameter[0].upper()} taken.")
         elif command == "drop":
             if not split:
                 print("Invalid command")
@@ -205,7 +205,7 @@ if __name__ == "__main__":
                 print("No such item.")
                 continue
 
-            print(f"{parameter[0]} dropped.")
+            print(f"{parameter[0].upper()} dropped.")
 
         elif command == "inventory":
             inventory = adventure.get_inventory()
