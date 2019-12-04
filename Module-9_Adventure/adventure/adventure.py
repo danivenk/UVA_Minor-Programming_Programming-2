@@ -15,9 +15,19 @@ from item import Item
 class Adventure():
     """
     adventure class defines a game of adventure
+
+    methods:
+    load_rooms              - loads rooms form filename
+    get_description         - description of current room
+    get_long_description    - long description of current room
+    move                    - move to specified room
+    is_forced               - check if forced exsits
+    get_items               - gets items in current room
+    add_to_inventory        - add item to inventory
+    del_from_inventory      - remove item from inventory
+    get_inventory           - gets inventory
     """
 
-    # Create rooms and items for the appropriate 'game' version.
     def __init__(self, game):
         """
         initializes the adventure class
@@ -39,7 +49,6 @@ class Adventure():
         assert 1 in self.rooms
         self.current_room = self.rooms[1]
 
-    # Load rooms from filename in two-step process
     def load_rooms(self, filename):
         """
         loads rooms from filename
@@ -127,67 +136,136 @@ class Adventure():
         # close file
         file.close()
 
-
-    # Pass along the description of the current room
     def get_description(self):
+        """
+        gets description of current room
+            short description if visited, long if not
+        
+        returns description
+        """
+
         if self.current_room.get_visited():
             return self.current_room.get_name()
         else:
             return self.current_room.get_description()
 
     def get_long_description(self):
+        """
+        returns long description
+        """
+
         return self.current_room.get_description()
 
-    # Move to a different room by changing "current" room, if possible
     def move(self, direction):
+        """
+        moves to a different room
+
+        parameter:
+        direction - direction to move to
+
+        return True if move has succeeded, False if not
+        """
+
+        # return false for non-existant directions 
         if not self.current_room.has_connection(direction):
             return False
 
+        # set visited True if not already true
         if not self.current_room.get_visited():
             self.current_room.set_visited()
 
+        # get room to move to
         move_room = self.current_room.get_connection(direction)
 
+        # check if there is a conditional movement in the direction
         for item in self.inventory:
             if item in move_room:
                 self.current_room = move_room[item]
                 return True
+
+        # move to standard room if not
         self.current_room = move_room[""]
 
         return True
 
     def is_forced(self):
+        """
+        checks for forced movement
+
+        returns true if forced movement has been found, else false
+        """
+
         if self.current_room.has_connection("forced"):
             return True
+
         return False
 
     def get_items(self):
-        room_items = self.current_room.get_items()
+        """
+        returns items in current room
+        """
 
-        for item in room_items.values():
-            print(item)
+        return self.current_room.get_items()
     
     def add_to_inventory(self, item_name):
+        """
+        add item to inventory
+
+        parameter:
+        item_name - name of item to be added
+
+        returns true if this succeeded, false if not
+        """
+        
+        # get item from room
         pickup_item = self.current_room.pick_up_item(item_name)
+
+        # if found add to inventory
         if pickup_item != None:
             self.inventory[item_name] = pickup_item
             return True
+
         return False
     
     def del_from_inventory(self, item_name):
+        """
+        remove item from inventory
+
+        parameter:
+        item_name - name of item to be removed
+
+        returns true if succeeded, false if not
+        """
+
+        # remove item to inventory
         if item_name in self.inventory:
             self.current_room.add_item(self.inventory.pop(item_name), item_name)
             return True
+        
         return False
 
     def get_inventory(self):
+        """
+        returns inventory
+        """
+
         return self.inventory
 
 
 def get_synonyms():
+    """
+    creates a synonym dictionary
+
+    returns synonym dictionary
+    """
+
+    # open synonym file
     with open("data/Synonyms.dat") as file:
+
+        # create synonym dictionary in following format {"synonym":"command"}
         synonyms_dict = {}
 
+        # add each synonym to the dictionary
         for line in file:
             line = line.lower().strip("\n")
             synonyms = line.split("=")
@@ -197,8 +275,10 @@ def get_synonyms():
         return synonyms_dict
 
 
+# run program
 if __name__ == "__main__":
     
+    # import library
     from sys import argv
 
     # Check command line arguments
@@ -215,6 +295,7 @@ if __name__ == "__main__":
     # Create game
     adventure = Adventure(game_name)
 
+    # get synonyms
     synonyms = get_synonyms()
 
     # Welcome user
@@ -222,7 +303,10 @@ if __name__ == "__main__":
 
     # Print very first room description
     print(adventure.get_description())
-    adventure.get_items()
+
+    # print items in room if any
+    for item in adventure.get_items().values():
+        print(item)
 
     # Prompt the user for commands until they type QUIT
     while True:
@@ -230,66 +314,106 @@ if __name__ == "__main__":
         # Prompt
         command = input("> ").lower()
 
+        # set split command to false
         split = False
 
+        # split command if it includes spaces into command an parameter
         if " " in command:
             commands = command.split(" ")
             command = commands.pop(0)
             parameter = commands
             split = True
 
+        # check if command is a synonym
         if command in synonyms:
             command = synonyms[command]
 
-        # Escape route
+        # quit program
         if command == "quit":
             break
+
+        # print help statement
         elif command == "help":
             print("You can move by typing directions such as EAST/WEST/IN/OUT")
             print("QUIT quits the game.")
             print("HELP prints instructions for the game.")
             print("INVENTORY lists the item in your inventory.")
-            print("LOOK lists the complete description of the room and its contents.")
+            print("LOOK lists the complete description of the room and" + \
+                "its contents.")
             print("TAKE <item> take item from the room.")
             print("DROP <item> drop item from your inventory.")
+
+        # print long description and items
         elif command == "look":
             print(adventure.get_long_description())
-            adventure.get_items()
+
+            # print items in room if any
+            for item in adventure.get_items().values():
+                print(item)
+        
+        # pick up specified item
         elif command == "take":
+
+            # if no parameters given invalid
             if not split:
                 print("Invalid command")
                 continue
-            elif not adventure.add_to_inventory(parameter[0]) or len(parameter) != 1:
+
+            # if not an item invalid
+            elif not adventure.add_to_inventory(parameter[0]) or \
+                len(parameter) != 1:
                 print("No such item.")
                 continue
 
+            # print if success
             print(f"{parameter[0].upper()} taken.")
+
+        # drop specified item
         elif command == "drop":
+
+            # if no parameters given invalid
             if not split:
                 print("Invalid command")
                 continue
-            elif not adventure.del_from_inventory(parameter[0]) or len(parameter) != 1:
+
+            # if not an item invalid
+            elif not adventure.del_from_inventory(parameter[0]) or \
+                len(parameter) != 1:
                 print("No such item.")
                 continue
 
+            # print if success
             print(f"{parameter[0].upper()} dropped.")
 
+        # print items in inventory
         elif command == "inventory":
+
+            # get items in inventory
             inventory = adventure.get_inventory()
+
+            # print if items in inventory
             if len(inventory) > 0:
                 for item in inventory.values():
                     print(item)
                 continue
 
+            # print if inventory is empty
             print("Your inventory is empty.")
+
+        # move to specified direction
         else:
+
+            # if no such direction connection invalid
             if not adventure.move(command):
                 print("Invalid command")
                 continue
 
+            # print description and items if any present
             print(adventure.get_description())
-            adventure.get_items()
+            for item in adventure.get_items().values():
+                print(item)
 
+            # move forced if necessary
             while adventure.is_forced():
                 adventure.move("forced")
                 print(adventure.get_description())

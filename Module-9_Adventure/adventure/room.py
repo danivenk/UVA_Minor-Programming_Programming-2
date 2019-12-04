@@ -13,6 +13,18 @@ class Room(object):
         and has items
 
     sub-class -> object
+
+    methods:
+    get_method      - returns name of the room;
+    get_description - returns description of the room;
+    add_connection  - adds connection to room;
+    has_connection  - checks if room has connection to a given direction;
+    get_connection  - returns the room to a given connection;
+    set_visited     - sets visited to True;
+    get_visited     - returns visited status;
+    add_item        - adds item to room;
+    get_items       - returns items in room;
+    pick_up_item    - removes (picks up) item from room
     """
 
     def __init__(self, room_id, name, description):
@@ -20,8 +32,8 @@ class Room(object):
         initializes the room class
 
         parameters:
-        room_id - the room number of the room;
-        name - name of the room
+        room_id     - the room number of the room;
+        name        - name of the room;
         description - description of the room
         """
 
@@ -56,9 +68,9 @@ class Room(object):
         adds an connection to the room
 
         parameters:
-        direction - direction of the the connected room;
-        room - the connected room;
-        condition - condition to enter this connection (default is "")
+        direction   - direction of the the connected room;
+        room        - the connected room;
+        condition   - condition to enter this connection (default is "")
         """
 
         # make sure condition and direction are lowercases
@@ -125,8 +137,8 @@ class Room(object):
         add item to room
 
         parameters:
-        item - item to add to room
-        item_name - name of item to add to room
+        item        - item to add to room;
+        item_name   - name of item to add to room
         """
         
         # make sure item_name is lowercase
