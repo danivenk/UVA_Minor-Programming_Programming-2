@@ -3,6 +3,7 @@
 """
 version: python 3+
 room.py defines the room class
+    used together with adventure.py and item.py
 Dani van Enk, 11823526
 """
 
@@ -24,8 +25,10 @@ class Room(object):
         description - description of the room
         """
 
-        # connection and item dictionaries
+        # connection dictionary init in following format {"direction":Room}
         self.connections = {}
+
+        # item dictionary init in following format {"item_name":Item}
         self.items = {}
 
         # Room properties

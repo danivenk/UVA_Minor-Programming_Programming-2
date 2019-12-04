@@ -3,6 +3,7 @@
 """
 version: python 3+
 item.py defines the item class
+    used together with adventure.py and room.py
 Dani van Enk, 11823526
 """
 

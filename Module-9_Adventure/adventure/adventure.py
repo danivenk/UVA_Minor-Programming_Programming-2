@@ -1,63 +1,130 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+version: python 3+
+adventure.py lets you play a game of adventure
+    used together with room.py and item.py
+Dani van Enk, 11823526
+"""
+
+# import room and item files
 from room import Room
 from item import Item
 
+
 class Adventure():
+    """
+    adventure class defines a game of adventure
+    """
 
     # Create rooms and items for the appropriate 'game' version.
     def __init__(self, game):
+        """
+        initializes the adventure class
 
-        # Rooms is a dictionary that maps a room number to the corresponding room object
+        parameter:
+        game - type of game to play
+        """
+
+        # room dictionary init in following format {roomnumber:Room}
         self.rooms = {}
 
+        # inventory dictionary init in following format {"item_name":Item}
         self.inventory = {}
 
         # Load room structures
         self.load_rooms(f"data/{game}Adv.dat")
 
-        # Game always starts in room number 1, so we'll set it after loading
+        # make sure room 1 is in room and set that as current room
         assert 1 in self.rooms
         self.current_room = self.rooms[1]
 
     # Load rooms from filename in two-step process
     def load_rooms(self, filename):
+        """
+        loads rooms from filename
+
+        parameter:
+        filename - file to load rooms from
+        """
+
+        # open file
         file = open(filename, "r")
 
         line = file.readline()
 
+        # read first paragraph
         while (line != "\n"):
+            """
+            line_data indexes:
+            0 is room number
+            1 is room name
+            2 is room description
+            """
+            
+            # create list of data in line
             line_data = line.strip("\n").split("\t")
 
-            self.rooms[int(line_data[0])] = Room(int(line_data[0]), line_data[1], line_data[2])
+            # create room
+            self.rooms[int(line_data[0])] = \
+                Room(int(line_data[0]), line_data[1], line_data[2])
 
             line = file.readline()
 
         line = file.readline()
 
+        # read second paragraph
         while (line != "\n"):
+
+            # create list of data in line
             line_data = line.strip("\n").split("\t")
 
+            # room number of editing room, first in line_data
             editing_room_no = int(line_data[0])
 
             for data in range(1, len(line_data), 2):
+                """
+                line data index:
+                odd is the direction of the connection
+                even is room to which the connection goes
+                    if it has an /, conditional room:
+                    first is the room
+                    second is the item name for the condition
+                """
+
                 if "/" in line_data[data + 1]:
                     conditional_room = line_data[data + 1].split("/")
-                    self.rooms[editing_room_no].add_connection(line_data[data], self.rooms[int(conditional_room[0])], conditional_room[1])
+                    self.rooms[editing_room_no].add_connection(line_data[data], \
+                        self.rooms[int(conditional_room[0])], conditional_room[1])
                 else:
-                    self.rooms[editing_room_no].add_connection(line_data[data], self.rooms[int(line_data[data + 1])])
+                    self.rooms[editing_room_no].add_connection(line_data[data], \
+                        self.rooms[int(line_data[data + 1])])
 
             line = file.readline()
 
         line = file.readline()
 
+        # read last paragraph
         while (line != ""):
+            """
+            line_data indexes:
+            0 is item name
+            1 is item description
+            2 is room number
+            """
+
+            # create list of data in line
             line_data = line.strip("\n").split("\t")
 
+            # create item
             new_item = Item(line_data[0], line_data[1])
 
+            # add to room
             self.rooms[int(line_data[2])].add_item(new_item, line_data[0])
 
             line = file.readline()
 
+        # close file
         file.close()
 
 
