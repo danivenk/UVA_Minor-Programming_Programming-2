@@ -7,6 +7,7 @@ item.py defines the item class
 Dani van Enk, 11823526
 """
 
+
 class Item(object):
     """
     the item class defines an item
