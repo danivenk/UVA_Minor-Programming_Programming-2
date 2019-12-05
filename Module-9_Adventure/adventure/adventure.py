@@ -60,16 +60,9 @@ class Adventure():
         # open file
         file = open(filename, "r")
 
-        line = file.readline()
-
         # read first paragraph
+        line = file.readline()
         while (line != "\n"):
-            """
-            line_data indexes:
-            0 is room number
-            1 is room name
-            2 is room description
-            """
             
             # create list of data in line
             line_data = line.strip("\n").split("\t")
@@ -80,9 +73,8 @@ class Adventure():
 
             line = file.readline()
 
-        line = file.readline()
-
         # read second paragraph
+        line = file.readline()
         while (line != "\n"):
 
             # create list of data in line
@@ -91,16 +83,10 @@ class Adventure():
             # room number of editing room, first in line_data
             editing_room_no = int(line_data[0])
 
+            # loop over direction room pairs and add connections to rooms
             for data in range(1, len(line_data), 2):
-                """
-                line data index:
-                odd is the direction of the connection
-                even is room to which the connection goes
-                    if it has an /, conditional room:
-                    first is the room
-                    second is the item name for the condition
-                """
 
+                # check for conditional room
                 if "/" in line_data[data + 1]:
                     conditional_room = line_data[data + 1].split("/")
                     self.rooms[editing_room_no].add_connection(line_data[data], \
@@ -111,16 +97,9 @@ class Adventure():
 
             line = file.readline()
 
-        line = file.readline()
-
         # read last paragraph
+        line = file.readline()
         while (line != ""):
-            """
-            line_data indexes:
-            0 is item name
-            1 is item description
-            2 is room number
-            """
 
             # create list of data in line
             line_data = line.strip("\n").split("\t")
