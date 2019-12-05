@@ -7,6 +7,7 @@ room.py defines the room class
 Dani van Enk, 11823526
 """
 
+
 class Room(object):
     """
     the room class defines a room which has connections to other rooms
@@ -168,6 +169,6 @@ class Room(object):
 
         # find item
         if item_name in self.items:
-                return self.items.pop(item_name)
+            return self.items.pop(item_name)
     
         return None
