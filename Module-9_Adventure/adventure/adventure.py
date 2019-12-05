@@ -318,7 +318,7 @@ if __name__ == "__main__":
             print("HELP prints instructions for the game.")
             print("INVENTORY lists the item in your inventory.")
             print("LOOK lists the complete description of the room and" + \
-                "its contents.")
+                    "its contents.")
             print("TAKE <item> take item from the room.")
             print("DROP <item> drop item from your inventory.")
 
@@ -340,7 +340,7 @@ if __name__ == "__main__":
 
             # if not an item invalid
             elif not adventure.add_to_inventory(parameter[0]) or \
-                len(parameter) != 1:
+                    len(parameter) != 1:
                 print("No such item.")
                 continue
 
@@ -357,7 +357,7 @@ if __name__ == "__main__":
 
             # if not an item invalid
             elif not adventure.del_from_inventory(parameter[0]) or \
-                len(parameter) != 1:
+                    len(parameter) != 1:
                 print("No such item.")
                 continue
 
