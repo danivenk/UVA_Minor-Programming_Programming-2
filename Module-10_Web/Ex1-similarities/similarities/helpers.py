@@ -50,4 +50,4 @@ def distances(a, b):
     #         print(element[0], end=" ")
     #     print()
 
-    return matrix[len(a)][len(b)][0]
+    return matrix[len(a)][len(b)]
