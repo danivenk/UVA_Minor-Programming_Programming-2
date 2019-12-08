@@ -45,9 +45,9 @@ def distances(a, b):
             else:
                 matrix[row][column] = (cost_substitution, Operation(3))
 
-    # for row in matrix:
-    #     for element in row:
-    #         print(element[0], end=" ")
-    #     print()
+    for row in matrix:
+        for element in row:
+            print(element[0], end=" ")
+        print()
 
-    return matrix[len(a)][len(b)]
+    return matrix
