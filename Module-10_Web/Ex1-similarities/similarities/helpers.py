@@ -15,18 +15,21 @@ class Operation(Enum):
 def distances(a, b):
     """Calculate edit distance from a to b"""
 
-    matrix = [[(0,0) for i in range(len(a) + 1)] for _ in range(len(b) + 1)]
+    width =len(a) + 1
+    height = len(b) + 1
+
+    matrix = [[(0,0) for i in range(width)] for _ in range(height)]
 
     matrix[0][0] = (0, None)
 
-    for row in range(1,len(a) + 1):
+    for row in range(1,width):
         matrix[row][0] = (row, Operation(2))
 
-    for column in range(1,len(b) + 1):
+    for column in range(1,height):
         matrix[0][column] = (column, Operation(1))
         
-    for row in range(1, len(a) + 1):
-        for column in range(1, len(b) + 1):
+    for row in range(2, width):
+        for column in range(2, height):
             cost_deletion = matrix[row - 1][column][0] + 1
             cost_insertion = matrix[row][column - 1][0] + 1
 
@@ -47,4 +50,7 @@ def distances(a, b):
     #         print(element[0], end=" ")
     #     print()
 
-    return matrix
+    return matrix[len(a)][len(b)][0]
+
+
+distances("dog", "")
