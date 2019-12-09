@@ -19,7 +19,7 @@ class Operation(Enum):
 def distances(a, b):
     """
     Calculate edit distance from a to b
-    
+
     parameters:
     a - string a
     b - string b
@@ -39,12 +39,12 @@ def distances(a, b):
 
     # edit first column in matrix with insertion operations
     for row in range(1, height):
-        matrix[row][0] = (row, Operation.INSERTED)
+        matrix[row][0] = (row, Operation.DELETED)
 
     # edit first row in matrix with deletion operations
     for column in range(1, width):
-        matrix[0][column] = (column, Operation.DELETED)
-    
+        matrix[0][column] = (column, Operation.INSERTED)
+
     # edit remaining elements of the matrix
     for row in range(1, height):
         for column in range(1, width):

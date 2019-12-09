@@ -1,1 +1,24 @@
-<!-- TODO -->
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th> </th>
+            {% for letter in s2 %}
+                <th>
+                    {{ letter }}
+                </th>
+            {% endfor %}
+        </tr>
+        {% for row in matrix %}
+            <tr>
+                <th>
+                    {{ s1[loop.index0] }}
+                </th>
+                {% for element in row %}
+                    <th>
+                        {{ element[0] }}
+                    </th>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
