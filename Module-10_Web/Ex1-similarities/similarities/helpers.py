@@ -39,11 +39,11 @@ def distances(a, b):
 
     # edit first column in matrix with insertion operations
     for row in range(1, height):
-        matrix[row][0] = (row, Operation(2))
+        matrix[row][0] = (row, Operation.INSERTED)
 
     # edit first row in matrix with deletion operations
     for column in range(1, width):
-        matrix[0][column] = (column, Operation(1))
+        matrix[0][column] = (column, Operation.DELETED)
     
     # edit remaining elements of the matrix
     for row in range(1, height):
@@ -60,10 +60,12 @@ def distances(a, b):
 
             # find lowest cost and edit this into matrix
             if cost_deletion < cost_insertion and cost_deletion < cost_substitution:
-                matrix[row][column] = (cost_deletion, Operation(1))
+                matrix[row][column] = (cost_deletion, Operation.DELETED)
             elif cost_insertion < cost_deletion and cost_insertion < cost_substitution:
-                matrix[row][column] = (cost_insertion, Operation(2))
+                matrix[row][column] = (cost_insertion, Operation.INSERTED)
             else:
-                matrix[row][column] = (cost_substitution, Operation(3))
+                matrix[row][column] = (cost_substitution, Operation.SUBSTITUTED)
 
     return matrix
+
+print(distances("a", "b"))
