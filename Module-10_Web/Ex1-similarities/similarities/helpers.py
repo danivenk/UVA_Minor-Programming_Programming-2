@@ -2,7 +2,11 @@ from enum import Enum
 
 
 class Operation(Enum):
-    """Operations"""
+    """
+    Operations class defines operation constants
+
+    sub-class is an Enum class
+    """
 
     DELETED = 1
     INSERTED = 2
@@ -13,41 +17,53 @@ class Operation(Enum):
 
 
 def distances(a, b):
-    """Calculate edit distance from a to b"""
+    """
+    Calculate edit distance from a to b
+    
+    parameters:
+    a - string a
+    b - string b
 
-    height =len(a) + 1
+    returns edit distance matrix
+    """
+
+    # define the height and width of the matrix
+    height = len(a) + 1
     width = len(b) + 1
 
+    # create empty matrix of size width x height
     matrix = [[(0, 0) for i in range(width)] for _ in range(height)]
 
+    # edit first element in the matrix
     matrix[0][0] = (0, None)
 
+    # edit first column in matrix with insertion operations
     for row in range(1, height):
         matrix[row][0] = (row, Operation(2))
 
+    # edit first row in matrix with deletion operations
     for column in range(1, width):
         matrix[0][column] = (column, Operation(1))
-        
+    
+    # edit remaining elements of the matrix
     for row in range(1, height):
         for column in range(1, width):
+            # calculate deletion cost and insertion cost
             cost_deletion = matrix[row - 1][column][0] + 1
             cost_insertion = matrix[row][column - 1][0] + 1
 
+            # calculate substitution cost, 0 if characters same else +1
             if a[row - 1] == b[column - 1]:
                 cost_substitution = matrix[row - 1][column - 1][0]
             else:
                 cost_substitution = matrix[row - 1][column - 1][0] + 1
 
+            # find lowest cost and edit this into matrix
             if cost_deletion < cost_insertion and cost_deletion < cost_substitution:
                 matrix[row][column] = (cost_deletion, Operation(1))
             elif cost_insertion < cost_deletion and cost_insertion < cost_substitution:
                 matrix[row][column] = (cost_insertion, Operation(2))
             else:
                 matrix[row][column] = (cost_substitution, Operation(3))
-
-    for row in matrix:
-        for element in row:
-            print(element[0], end=" ")
-        print()
 
     return matrix
