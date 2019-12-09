@@ -67,5 +67,3 @@ def distances(a, b):
                 matrix[row][column] = (cost_substitution, Operation.SUBSTITUTED)
 
     return matrix
-
-print(distances("a", "b"))
