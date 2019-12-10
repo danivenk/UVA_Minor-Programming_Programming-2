@@ -10,13 +10,13 @@
 
         <div class="form-group col-sm-6">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
         </div>
         <div class="form-group col-sm-6">
             <label for="mtype">Media Type:</label>
-            <select name="mtype" class="custom-select form-control" id="mtype" required>
+            <select name="mtype" class="custom-select form-control" id="mtype">
                 <option value="" selected>Select Media Type</option>
                 <option value="manga">Manga</option>
                 <option value="anime">Anime</option>
@@ -28,7 +28,7 @@
         <div class="form-group col-sm-6">
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" value="">
+                    <input type="checkbox" class="form-check-input" value="yes" name="adult">
                     Check if for 18+
                 </label>
             </div>
@@ -39,21 +39,21 @@
 
     </form>
 
-    <script>
+    <!--<script>-->
 
-        var form = document.querySelector(".needs-validation");
-        var validation_items = document.querySelectorAll(".form-control");
+    <!--    var form = document.querySelector(".needs-validation");-->
+    <!--    var validation_items = document.querySelectorAll(".form-control");-->
 
-        form.addEventListener('submit', function(event) {
-            for (const item of validation_items) {
-                if (item.validity.valueMissing === true) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-            }
-            form.classList.add('was-validated');
-        }, false);
+    <!--    form.addEventListener('submit', function(event) {-->
+    <!--        for (const item of validation_items) {-->
+    <!--            if (item.validity.valueMissing === true) {-->
+    <!--              event.preventDefault();-->
+    <!--              event.stopPropagation();-->
+    <!--            }-->
+    <!--        }-->
+    <!--        form.classList.add('was-validated');-->
+    <!--    }, false);-->
 
-    </script>
+    <!--</script>-->
 
 {% endblock %}
