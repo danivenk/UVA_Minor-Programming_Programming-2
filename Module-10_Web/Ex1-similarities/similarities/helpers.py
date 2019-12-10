@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+version: python 3+
+helpers.py defines an Operation class with 3 operations
+    and a distance function which calculates the edit cost between 2 strings
+Dani van Enk, 11823526
+"""
+
+
+# import modules
 from enum import Enum
 
 
