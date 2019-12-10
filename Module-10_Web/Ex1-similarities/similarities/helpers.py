@@ -12,8 +12,8 @@ class Operation(Enum):
     INSERTED = 2
     SUBSTITUTED = 3
 
-    # def __str__(self):
-    #     return str(self.name.lower())
+    def __str__(self):
+        return str(self.name.lower())
 
 
 def distances(a, b):

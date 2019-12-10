@@ -1,22 +1,36 @@
+<!--
+index.html creates the homepage for the similarities application
+Dani van Enk, 11823526
+-->
+
 {% extends "layout.html" %}
 
 {% block body %}
-    <div class="col-12">
+
+    <!--explanation of what the application does-->
+    <div class="col-sm-12">
         <h1>Compare 2 strings</h1>
         Compare 2 strings and calculate the edit cost.
     </div>
-    <div class="col-6">
+    <div class="col-sm-6">
 
+        <!--form to specify the strings to be compared-->
         <form action="/score" method="POST">
+
+            <!--input for string 1-->
             <div class="form-group">
                 <label>String 1:</label>
                 <input type="text" class="form-control" placeholder="string 1" name="string1">
             </div>
+
+            <!--input for string 2-->
             <div class="form-group">
                 <label>String 2:</label>
                 <input type="text" class="form-control" placeholder="string 2" name="string2">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <!--sumbit button-->
+            <button type="submit" class="btn btn-primary">Calculate</button>
         </form>
 
     </div>

@@ -1,24 +1,59 @@
-<div class="table-responsive">
-    <table class="table">
+<!--
+matrix.html creates a table matrix from the matrix generated
+Dani van Enk, 11823526
+-->
+
+<!--make sure s1 and s2 have as many characters as the length and width of matrix-->
+{% set s1 = " " + s1 %}
+{% set s2 = " " + s2 %}
+
+<!--matrix-->
+<table class="table table-sm">
+    <tbody>
+        <!--show string 2-->
         <tr>
-            <th> </th>
+            <!--fill up cells-->
+            <td></td><td></td>
+
+            <!--loop over every character-->
             {% for letter in s2 %}
                 <th>
                     {{ letter }}
                 </th>
             {% endfor %}
         </tr>
+        <!--show indexes of string 2-->
+        <tr>
+            <!--fill up cells-->
+            <td></td><td></td>
+
+            <!--show every index-->
+            {% for letter in s2 %}
+                <th>
+                    {{ loop.index0 }}
+                </th>
+            {% endfor %}
+        </tr>
+
+        <!--loop over every row of the matrix-->
         {% for row in matrix %}
             <tr>
+                <!--show a letter from string 1 in first cell-->
                 <th>
                     {{ s1[loop.index0] }}
                 </th>
+                <!--show the index of that letter in second row-->
+                <th>
+                    {{ loop.index0 }}
+                </th>
+
+                <!--then loop over the rest end show it-->
                 {% for element in row %}
-                    <th>
+                    <td>
                         {{ element[0] }}
-                    </th>
+                    </td>
                 {% endfor %}
             </tr>
         {% endfor %}
-    </table>
-</div>
+    </tbody>
+</table>
