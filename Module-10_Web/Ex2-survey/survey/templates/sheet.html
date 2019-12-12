@@ -1,0 +1,43 @@
+<!--
+sheet.html creates sheet from the data file
+Dani van Enk, 11823526
+-->
+
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <!--header of page-->
+    <h1>Sheet</h1>
+    <p>The following items are already in the database.</p>
+
+    <!--sheet-->
+    <table class="table table-hover">
+        <tbody>
+            <!--loop over each row in the data file-->
+            {% for row in data %}
+
+                <!--set row counter-->
+                {% set row_index = loop.index-0 %}
+                    <tr>
+
+                        <!--loop over each element in a row-->
+                        {% for data_element in row %}
+
+                            <!--make the first row a table header and the rest table elements-->
+                            {% if row_index == 1 %}
+                                <th>
+                                    {{ data_element }}
+                                </th>
+                            {% else %}
+                                <td>
+                                    {{ data_element }}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

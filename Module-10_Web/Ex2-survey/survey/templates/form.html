@@ -1,30 +1,41 @@
+<!--
+form.html creates form from where data can be added to the data file
+Dani van Enk, 11823526
+-->
+
 {% extends "layout.html" %}
 
 {% block main %}
 
     <!-- http://getbootstrap.com/docs/4.1/content/typography/ -->
     <h1 class="mb-3">Form</h1>
+    <p>With this form you can add manga, light novels and anime to the database</p>
 
     <!-- http://getbootstrap.com/docs/4.1/components/forms/ -->
-    <form action="/form" method="post" class="needs-validation">
+    <form action="/form" method="post" class="needs-validation" novalidate>
 
+        <!--name text field-->
         <div class="form-group col-sm-6">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Please fill out this field.</div>
         </div>
+
+        <!--media type selection menu-->
         <div class="form-group col-sm-6">
             <label for="mtype">Media Type:</label>
-            <select name="mtype" class="custom-select form-control" id="mtype">
-                <option value="" selected>Select Media Type</option>
+            <select name="mtype" class="custom-select form-control" id="mtype" required>
+                <option value="" selected disabled>Select Media Type</option>
                 <option value="manga">Manga</option>
                 <option value="anime">Anime</option>
                 <option value="light novel">Light Novel</option>
             </select>
             <div class="valid-feedback">Valid.</div>
-            <div class="invalid-feedback">Please fill out this field.</div>
+            <div class="invalid-feedback">Please choose something from the list</div>
         </div>
+
+        <!--for 18+ checkbox-->
         <div class="form-group col-sm-6">
             <div class="form-check">
                 <label class="form-check-label">
@@ -39,21 +50,25 @@
 
     </form>
 
-    <!--<script>-->
+    <script>
 
-    <!--    var form = document.querySelector(".needs-validation");-->
-    <!--    var validation_items = document.querySelectorAll(".form-control");-->
+        // find form and validation items in the page
+        var form = document.querySelector(".needs-validation");
+        var validation_items = document.querySelectorAll(".form-control");
 
-    <!--    form.addEventListener('submit', function(event) {-->
-    <!--        for (const item of validation_items) {-->
-    <!--            if (item.validity.valueMissing === true) {-->
-    <!--              event.preventDefault();-->
-    <!--              event.stopPropagation();-->
-    <!--            }-->
-    <!--        }-->
-    <!--        form.classList.add('was-validated');-->
-    <!--    }, false);-->
+        // check if required fields are empty upon submitting and stop it if that's the case
+        form.addEventListener('submit', function(event) {
+            for (const item of validation_items) {
+                if (item.value === "") {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+            }
 
-    <!--</script>-->
+            // give was-validated class to form if validation was completed
+            form.className = "was-validated";
+        }, false);
+
+    </script>
 
 {% endblock %}

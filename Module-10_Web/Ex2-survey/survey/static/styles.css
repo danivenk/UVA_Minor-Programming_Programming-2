@@ -1,1 +1,12 @@
-/* TODO */
+nav {
+    background-color: #E06;
+}
+
+.nav-link {
+    color: #FFF !important;
+}
+
+#submit {
+    background-color: #1F9;
+    color: #000;
+}
