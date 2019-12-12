@@ -6,6 +6,10 @@ nav {
     color: #FFF !important;
 }
 
+.nav-item:hover {
+    background-color: #B74073;
+}
+
 #submit {
     background-color: #1F9;
     color: #000;
