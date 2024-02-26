@@ -18,4 +18,4 @@ Module 9 - Adventure
 
 Module 10 - Web
 - Ex1 - similarities   check the similarities of 2 strings and calculate the edit cost as a Flask app
-- Ex2 - survey         creates a survey application using flask
+- Ex2 - survey         creates a survey application using Flask
