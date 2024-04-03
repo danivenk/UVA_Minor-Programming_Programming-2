@@ -1,5 +1,5 @@
 # UVA_Minor-Programming_Programming-2
-Exercises for the Minor Programming Programming 2 course
+Exercises for the Minor Programming Programming 2 course (2019)
 
 Module 6 - HTTP
 - Ex1 - HTTP            a website exercise shown live at [mprog.hakkajiten.com/module-6_http/](https://mprog.hakkajiten.com/module-6_http/)
